@@ -10,8 +10,10 @@ public class Main {
         int number = 0;
         do {
             System.out.println("Choose option 1: Add student");
-            System.out.println("Choose option 2: view student");
-            System.out.println("Choose option 3: exit");
+            System.out.println("Choose option 2: View students");
+            System.out.println("Choose option 3: Search student");
+            System.out.println("Choose option 4: Update student");
+            System.out.println("Choose option 5: Exit");
             number = sc.nextInt();
             switch (number) {
                 case 1:
@@ -20,15 +22,29 @@ public class Main {
                     System.out.print("Enter ID: ");
                     s.setId(sc.nextInt());
 
+                    sc.nextLine(); // consume newline
+
                     System.out.print("Enter Name: ");
                     s.setName(sc.nextLine());
 
                     System.out.print("Enter Age: ");
-                    s.setAge(sc.nextInt());
+                    int age = sc.nextInt();
+
+                    if(age <= 0) {
+                        System.out.println("Invalid Age");
+                        break;
+                    }
+                    s.setAge(age);
 
                     System.out.print("Enter Marks: ");
-                    s.setMarks(sc.nextInt());
+                    int marks = sc.nextInt();
 
+                    if(marks < 0 || marks > 100) {
+                        System.out.println("Marks should be between 0 and 100");
+                        break;
+                    }
+
+                    s.setMarks(marks);
                     students.add(s);
 
                     System.out.println("Student Added Successfully");
@@ -42,81 +58,69 @@ public class Main {
                         }
                     }
                     break;
+                case 3:
+
+                    System.out.print("Enter Student ID to search: ");
+                    int searchId = sc.nextInt();
+
+                    boolean found = false;
+
+                    for(Student student : students) {
+
+                        if(student.getId() == searchId) {
+                            System.out.println(student);
+                            found = true;
+                            break;
+                        }
+                    }
+
+                    if(!found) {
+                        System.out.println("Student not found");
+                    }
+
+                    break;
+                case 4:
+
+                    System.out.print("Enter Student ID to update: ");
+                    int updateId = sc.nextInt();
+
+                    boolean updated = false;
+
+                    for(Student student : students) {
+
+                        if(student.getId() == updateId) {
+
+                            sc.nextLine();
+
+                            System.out.print("Enter New Name: ");
+                            student.setName(sc.nextLine());
+
+                            System.out.print("Enter New Age: ");
+                            student.setAge(sc.nextInt());
+
+                            System.out.print("Enter New Marks: ");
+                            student.setMarks(sc.nextInt());
+
+                            System.out.println("Student Updated Successfully");
+
+                            updated = true;
+                            break;
+                        }
+                    }
+
+                    if(!updated) {
+                        System.out.println("Student not found");
+                    }
+
+                    break;
+                case 5:
+                    System.out.println("Exiting...");
+                    break;
                 default:
                     System.out.println("Invalid size number");
             }
-        } while(number!=3);
+        } while(number!=5);
 
     }
 }
 
-//import java.util.ArrayList;
-//import java.util.Scanner;
-//
-//public class Main {
-//
-//    public static void main(String[] args) {
-//
-//        Scanner sc = new Scanner(System.in);
-//        ArrayList<Student> students = new ArrayList<>();
-//
-//        int number;
-//
-//        do {
-//            System.out.println("\n===== STUDENT MANAGEMENT SYSTEM =====");
-//            System.out.println("1. Create Student");
-//            System.out.println("2. View Students");
-//            System.out.println("3. Exit");
-//
-//            System.out.print("Choose option: ");
-//            number = sc.nextInt();
-//
-//            switch (number) {
-//
-//                case 1:
-//
-//                    Student s = new Student();
-//
-//                    System.out.print("Enter ID: ");
-//                    s.setId(sc.nextInt());
-//
-//                    sc.nextLine();
-//
-//                    System.out.print("Enter Name: ");
-//                    s.setName(sc.nextLine());
-//
-//                    System.out.print("Enter Age: ");
-//                    s.setAge(sc.nextInt());
-//
-//                    System.out.print("Enter Marks: ");
-//                    s.setMarks(sc.nextInt());
-//
-//                    students.add(s);
-//
-//                    System.out.println("Student Added Successfully");
-//                    break;
-//
-//                case 2:
-//
-//                    if (students.isEmpty()) {
-//                        System.out.println("No Students Found");
-//                    } else {
-//                        for (Student student : students) {
-//                            System.out.println(student);
-//                        }
-//                    }
-//                    break;
-//
-//                case 3:
-//                    System.out.println("Exiting...");
-//                    break;
-//
-//                default:
-//                    System.out.println("Invalid Option");
-//            }
-//
-//        } while (number != 3);
-//
-//        sc.close();
-//    }
-//}
