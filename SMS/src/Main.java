@@ -13,8 +13,17 @@ public class Main {
             System.out.println("Choose option 2: View students");
             System.out.println("Choose option 3: Search student");
             System.out.println("Choose option 4: Update student");
+            System.out.println("Choose option 5: Delete student");
             System.out.println("Choose option 5: Exit");
-            number = sc.nextInt();
+            try {
+                number = sc.nextInt();
+            } catch (Exception e) {
+
+                System.out.println("Invalid Input. Please enter a number.");
+
+                sc.nextLine();
+                continue;
+            }
             switch (number) {
                 case 1:
                     Student s = new Student();
@@ -114,12 +123,37 @@ public class Main {
 
                     break;
                 case 5:
+
+                    System.out.print("Enter Student ID to delete: ");
+                    int deleteId = sc.nextInt();
+
+                    boolean deleted = false;
+
+                    for (int i = 0; i < students.size(); i++) {
+
+                        if (students.get(i).getId() == deleteId) {
+
+                            students.remove(i);
+
+                            System.out.println("Student Deleted Successfully");
+
+                            deleted = true;
+                            break;
+                        }
+                    }
+
+                    if (!deleted) {
+                        System.out.println("Student not found");
+                    }
+
+                    break;
+                case 6:
                     System.out.println("Exiting...");
                     break;
                 default:
                     System.out.println("Invalid size number");
             }
-        } while(number!=5);
+        } while(number!=6);
 
     }
 }
