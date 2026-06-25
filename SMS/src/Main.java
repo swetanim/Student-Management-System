@@ -9,12 +9,7 @@ public class Main {
         System.out.println("Choose your option");
         int number = 0;
         do {
-            System.out.println("Choose option 1: Add student");
-            System.out.println("Choose option 2: View students");
-            System.out.println("Choose option 3: Search student");
-            System.out.println("Choose option 4: Update student");
-            System.out.println("Choose option 5: Delete student");
-            System.out.println("Choose option 5: Exit");
+            displayMenu();
             try {
                 number = sc.nextInt();
             } catch (Exception e) {
@@ -156,5 +151,15 @@ public class Main {
         } while(number!=6);
 
     }
+    public static void displayMenu() {
+
+        System.out.println("Choose option 1: Add student");
+        System.out.println("Choose option 2: View students");
+        System.out.println("Choose option 3: Search student");
+        System.out.println("Choose option 4: Update student");
+        System.out.println("Choose option 5: Delete student");
+        System.out.println("Choose option 6: Exit");
+    }
+
 }
 
