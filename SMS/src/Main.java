@@ -56,7 +56,6 @@ public class Main {
                     s.setMarks(marks);
                     students.add(s);
                     saveToFile();
-                    System.out.println("saveToFile called");
 
                     System.out.println("Student Added Successfully");
                     break;
