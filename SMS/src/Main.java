@@ -1,11 +1,16 @@
+
  import java.util.ArrayList;
  import java.util.Scanner;
+ import java.io.File;
+ import java.io.FileWriter;
 
 
 public class Main {
+    static ArrayList<Student> students = new ArrayList<>();
+
     public static void main(String[] args) {
+        saveToFile();
         Scanner sc = new Scanner(System.in);
-        ArrayList<Student> students = new ArrayList<>();
         System.out.println("Choose your option");
         int number = 0;
         do {
@@ -34,7 +39,7 @@ public class Main {
                     System.out.print("Enter Age: ");
                     int age = sc.nextInt();
 
-                    if(age <= 0) {
+                    if (age <= 0) {
                         System.out.println("Invalid Age");
                         break;
                     }
@@ -43,13 +48,15 @@ public class Main {
                     System.out.print("Enter Marks: ");
                     int marks = sc.nextInt();
 
-                    if(marks < 0 || marks > 100) {
+                    if (marks < 0 || marks > 100) {
                         System.out.println("Marks should be between 0 and 100");
                         break;
                     }
 
                     s.setMarks(marks);
                     students.add(s);
+                    saveToFile();
+                    System.out.println("saveToFile called");
 
                     System.out.println("Student Added Successfully");
                     break;
@@ -69,16 +76,16 @@ public class Main {
 
                     boolean found = false;
 
-                    for(Student student : students) {
+                    for (Student student : students) {
 
-                        if(student.getId() == searchId) {
+                        if (student.getId() == searchId) {
                             System.out.println(student);
                             found = true;
                             break;
                         }
                     }
 
-                    if(!found) {
+                    if (!found) {
                         System.out.println("Student not found");
                     }
 
@@ -90,9 +97,9 @@ public class Main {
 
                     boolean updated = false;
 
-                    for(Student student : students) {
+                    for (Student student : students) {
 
-                        if(student.getId() == updateId) {
+                        if (student.getId() == updateId) {
 
                             sc.nextLine();
 
@@ -105,6 +112,7 @@ public class Main {
                             System.out.print("Enter New Marks: ");
                             student.setMarks(sc.nextInt());
 
+                            saveToFile();
                             System.out.println("Student Updated Successfully");
 
                             updated = true;
@@ -112,7 +120,7 @@ public class Main {
                         }
                     }
 
-                    if(!updated) {
+                    if (!updated) {
                         System.out.println("Student not found");
                     }
 
@@ -129,6 +137,7 @@ public class Main {
                         if (students.get(i).getId() == deleteId) {
 
                             students.remove(i);
+                            saveToFile();
 
                             System.out.println("Student Deleted Successfully");
 
@@ -148,9 +157,10 @@ public class Main {
                 default:
                     System.out.println("Invalid size number");
             }
-        } while(number!=6);
+        } while (number != 6);
 
     }
+
     public static void displayMenu() {
 
         System.out.println("Choose option 1: Add student");
@@ -161,5 +171,63 @@ public class Main {
         System.out.println("Choose option 6: Exit");
     }
 
-}
+    public static void saveToFile() {
 
+        try {
+
+            FileWriter writer = new FileWriter("Student_data.txt");
+
+            for (Student student : students) {
+
+                writer.write(
+                        student.getId() + "," +
+                                student.getName() + "," +
+                                student.getAge() + "," +
+                                student.getMarks() + "\n"
+                );
+            }
+
+            writer.close();
+
+        } catch (Exception e) {
+
+            System.out.println("Error saving file");
+        }
+    }
+
+    public static void loadFromFile() {
+
+        try {
+
+            File file = new File("Student_data.txt");
+
+            if (!file.exists()) {
+                return;
+            }
+
+            Scanner fileScanner = new Scanner(file);
+
+            while (fileScanner.hasNextLine()) {
+
+                String line = fileScanner.nextLine();
+
+                String[] data = line.split(",");
+
+                Student s = new Student();
+
+                s.setId(Integer.parseInt(data[0]));
+                s.setName(data[1]);
+                s.setAge(Integer.parseInt(data[2]));
+                s.setMarks(Integer.parseInt(data[3]));
+
+                students.add(s);
+            }
+
+            fileScanner.close();
+
+        } catch (Exception e) {
+
+            System.out.println("Error loading file");
+        }
+    }
+}
