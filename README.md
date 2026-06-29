@@ -1,40 +1,60 @@
 # Student Management System
 
-## Features Completed
+A console-based Java application for managing student records. This project was built using Core Java and demonstrates object-oriented programming, file handling, exception handling, and Git version control.
 
-### Monday
+## Features
 
-* Setup Java project
-* Created Student class with fields:
-
-  * ID
-  * Name
-  * Age
-  * Marks
-* Created menu-driven console application
-
-### Tuesday
-
-* Implemented Add Student functionality
-* Implemented View Students functionality
-* Used ArrayList to store student records
-
-### Wednesday
-
-* Implemented Search Student by ID
-* Implemented Update Student Details
-* Added input validation for Age and Marks
+- Add a new student
+- View all students
+- Search student by ID
+- Delete student by ID
+- Automatic data persistence using a text file
+- Automatic loading of saved records on application startup
+- Exception handling for invalid user input
+- Menu-driven console interface
 
 ## Technologies Used
 
-* Java
-* ArrayList
-* OOP Concepts
-* Git & GitHub
+- Java
+- IntelliJ IDEA
+- Git
+- GitHub
 
-## Upcoming Features
+## Project Structure
 
-* Delete Student
-* Exception Handling
-* File Storage
-* Auto Load Records from File
+```
+Student-Management-System/
+│
+├── src/
+│   ├── Main.java
+│   └── Student.java
+│
+├── student_data.txt
+├── README.md
+└── .gitignore
+```
+
+## Concepts Implemented
+
+- Object-Oriented Programming (OOP)
+- Classes and Objects
+- ArrayList Collections
+- File Handling
+- Exception Handling
+- Methods and Functions
+- Loops and Conditional Statements
+- Git Version Control
+
+## Future Improvements
+
+- Update student information
+- Sort students by name or ID
+- Store data using a database (MySQL)
+- Build a Java Swing or JavaFX GUI
+- Develop a REST API using Spring Boot
+
+## Author
+
+**Sweta Kumari**
+
+Software Engineer | Java Developer
